@@ -29,7 +29,7 @@ curl "https://garden-api.candideapp.com"
 
 > Make sure to replace `plants-plants-plants` with your API key.
 
-Candide Garden API uses API keys to allow access to the API. You can register a new API key at our [CMS](http://example.com/developers).
+Candide Garden API uses API keys to allow access to the API. You can register a new API key at our [CMS](https://cms.candideapp.com/api-keys).
 
 The Garden API expects the API key to be included in all API requests to the server in a header that looks like the following:
 
@@ -112,5 +112,60 @@ This endpoint retrieves all tickets.
 | startDate |         | Filter out all records before this date and time. ISO Format YYYY-MM-DDTHH:mm:ss UTC |
 | endDate   | now     | Filter out all records after this date and time                                      |
 | after     |         | The id of the last record from the previous page                                     |
-| limit     | 10      | The number of record per page                                                        |
+| limit     | 10      | The number of records per page                                                       |
+| sortOrder | ASC     | ASC or DESC                                                                          |
+
+# Check-ins
+
+## Get All Check-ins
+
+```shell
+curl "https://garden-api.candideapp.com/checkins"
+  -H "Authorization: plants-plants-plants"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": "61515eb4-10f7-4eed-b835-5fe385cf53cd",
+    "checkinTime": "2020-04-27T16:30:41.023Z",
+    "notes": null,
+    "ticketId": "e4213f17-3631-4f3d-98a5-f1c8b57e0159",
+    "attendance": {
+      "Adult": 1
+    },
+    "email": "th111@whatever.com",
+    "phone": "01445 326598"
+  },
+  {
+    "id": "55c77fe7-4885-4a7a-a554-cdf9649f74d0",
+    "checkinTime": "2020-04-27T16:22:09.674Z",
+    "notes": null,
+    "ticketId": "e4213f17-3631-4f3d-98a5-f1c8b57e0159",
+    "attendance": {
+      "Adult": 1
+    },
+    "email": "th111@whatever.com",
+    "phone": "01445 326598"
+  }
+]
+```
+
+This endpoint retrieves all check-ins.
+
+### HTTP Request
+
+`https://garden-api.candideapp.com/checkins`
+
+### Query Parameters
+
+| Parameter | Default | Description                                                                          |
+| --------- | ------- | ------------------------------------------------------------------------------------ |
+| startDate |         | Filter out all records before this date and time. ISO Format YYYY-MM-DDTHH:mm:ss UTC |
+| endDate   | now     | Filter out all records after this date and time                                      |
+| ticketId  |         | Return only checkins for the specified ticket                                        |
+| after     |         | The id of the last record from the previous page                                     |
+| limit     | 10      | The number of records per page                                                       |
 | sortOrder | ASC     | ASC or DESC                                                                          |
